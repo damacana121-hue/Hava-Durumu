@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GRADLE_OPTS: "-Dandroid.disallowKotlinSourceSets=false"
 
     steps:
       - name: Checkout
@@ -38,7 +40,7 @@ jobs:
           gradle-version: "9.3.1"
 
       - name: Build debug APK
-        run: gradle assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
